@@ -1,5 +1,6 @@
 # Uploading temperature sensor data in Thing Speak cloud
-
+# Name: Saranya S
+# Register Number: 212223110044
 # AIM:
 To monitor the temperature sensor data in the Thing speak using an ESP32 controller.
 
@@ -71,10 +72,68 @@ Automatically act on your data and communicate using third-party services like T
 
 
 # PROGRAM:
+```
+#include"ThingSpeak.h"
+#include<WiFi.h>
+#include"DHT.h"
 
+char ssid[]="SEC_IOT";
+char pass[]="sec@3000";
+WiFiClient client;
+const int out=2;
+float Temperature=0;
+float Humidity=0;
+DHT dht(out,DHT11);
+
+unsigned long myChannelField=3360486;
+const int TemperatureField=1;
+const int HumidityField=2;
+const char* myWriteAPIKey="TH2DMR23144HLYZQ";
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(115200);
+  ThingSpeak.begin(client);
+  dht.begin();
+  pinMode(out,INPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+if(WiFi.status()!=WL_CONNECTED)
+{
+  Serial.print("Attempting to conncet to SSID: ");
+  Serial.println(ssid);
+  while(WiFi.status()!=WL_CONNECTED){
+    WiFi.begin(ssid,pass);
+    Serial.print(" ");
+    delay(5000);
+  }
+  Serial.println("\nConnected");
+}
+float temperature=dht.readTemperature();
+float humidity=dht.readHumidity();
+Serial.print("Temperature: ");
+Serial.print(temperature);
+Serial.println(" C");
+Serial.print("Humidity ");
+Serial.print(humidity);
+Serial.println(" g.m-3");
+
+ThingSpeak.setField(TemperatureField,temperature);
+ThingSpeak.setField(HumidityField,humidity);
+ThingSpeak.writeFields(myChannelField,myWriteAPIKey);
+delay(5000);
+}
+
+```
 # CIRCUIT DIAGRAM:
+<img width="555" height="739" alt="image" src="https://github.com/user-attachments/assets/caaf68a2-352f-4fc1-9cc7-c471ba6feba4" />
 
 # OUTPUT:
+
+<img width="1919" height="1079" alt="Screenshot 2026-04-28 115337" src="https://github.com/user-attachments/assets/ad17c316-0884-46fe-8de3-f14d2cafcdc5" />
+
+<img width="1919" height="919" alt="Screenshot 2026-04-28 115238" src="https://github.com/user-attachments/assets/684557fc-84dc-41e9-952c-32bf479f25b4" />
 
 # RESULT:
 
