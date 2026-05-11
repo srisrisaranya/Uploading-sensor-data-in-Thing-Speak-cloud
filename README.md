@@ -133,7 +133,8 @@ delay(5000);
 
 <img width="1919" height="1079" alt="Screenshot 2026-04-28 115337" src="https://github.com/user-attachments/assets/ad17c316-0884-46fe-8de3-f14d2cafcdc5" />
 
-<img width="1919" height="919" alt="Screenshot 2026-04-28 115238" src="https://github.com/user-attachments/assets/684557fc-84dc-41e9-952c-32bf479f25b4" />
+<img width="1918" height="917" alt="Thingspeak" src="https://github.com/user-attachments/assets/e245d630-b648-455b-bada-9179fcda1701" />
+
 
 # RESULT:
 
